@@ -166,12 +166,12 @@ impl Opera {
             None => vec![],
             Some(p) => {
                 let mut base = p.0.clone();
-                let mut prev = p.0
-                    .iter()
-                    .map(|ph| self.get_ancestors(ph).unwrap())
-                    .map(|v| v.into_iter())
-                    .flatten()
-                    .collect();
+                let mut prev =
+                    p.0.iter()
+                        .map(|ph| self.get_ancestors(ph).unwrap())
+                        .map(|v| v.into_iter())
+                        .flatten()
+                        .collect();
                 base.append(&mut prev);
                 base
             }

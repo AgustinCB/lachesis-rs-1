@@ -100,14 +100,14 @@ impl<P: Peer<Opera> + Clone> Lachesis<P> {
             let mut opera = get_from_mutex!(self.opera, ResourceHashgraphPoisonError)?;
             let frames = get_from_mutex!(self.frames, ResourceFramesPoisonError)?;
             let current_frame: &Frame = &frames[current_frame_id];
-            let previous_frame: &Frame = &frames[current_frame_id-1];
+            let previous_frame: &Frame = &frames[current_frame_id - 1];
             for root in previous_frame.root_set.iter() {
                 let seen_by = current_frame
                     .root_set
                     .iter()
                     .filter(|eh| opera.can_see(*eh, root).unwrap())
                     .count();
-                if seen_by > self.network.len()/3 {
+                if seen_by > self.network.len() / 3 {
                     opera.set_clotho(root)?;
                 }
             }
