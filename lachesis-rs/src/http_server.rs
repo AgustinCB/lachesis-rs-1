@@ -1,12 +1,8 @@
 use actix_web::{
-    error, http, middleware, server, App, AsyncResponder, Error, HttpMessage, HttpRequest,
-    HttpResponse, Json,
+    http, middleware, server, App, AsyncResponder, Error, HttpMessage, HttpRequest, HttpResponse,
 };
 
-use bytes::BytesMut;
-use futures::{future::result, Future, Stream};
-use json::JsonValue;
-use serde_json::Value;
+use futures::{future::result, Future};
 
 pub struct HttpServer;
 
@@ -75,12 +71,12 @@ pub fn check_transaction_status(
     req: &HttpRequest,
 ) -> Box<Future<Item = HttpResponse, Error = Error>> {
     //TODO: implement get transaction status from id
-    let transaction_id = req.match_info().get("id").expect("no id provided");
+    let _transaction_id = req.match_info().get("id").expect("no id provided");
 
     result(Ok(HttpResponse::Ok().json(TransactionStatus::Failed))).responder()
 }
 
-pub fn get_peers(req: &HttpRequest) -> Box<Future<Item = HttpResponse, Error = Error>> {
+pub fn get_peers(_req: &HttpRequest) -> Box<Future<Item = HttpResponse, Error = Error>> {
     //TODO: implement get list of peers
     let peers = vec![Peer {
         id: "wefwef".to_string(),

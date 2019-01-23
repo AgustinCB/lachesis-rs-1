@@ -18,7 +18,7 @@ fn create_node(rng: &mut ring::rand::SystemRandom) -> DummyNode {
     DummyNode::new(rng)
 }
 
-fn spawn_node(node: &Arc<Box<DummyNode>>) -> (thread::JoinHandle<!>, thread::JoinHandle<!>) {
+fn spawn_node(node: &Arc<DummyNode>) -> (thread::JoinHandle<!>, thread::JoinHandle<!>) {
     let answer_thread_node = node.clone();
     let sync_thread_node = node.clone();
     let answer_handler = thread::spawn(move || loop {
@@ -59,7 +59,7 @@ fn main() {
     let n_nodes = args[1].parse::<usize>().unwrap();
     let mut nodes = Vec::with_capacity(n_nodes);
     for _ in 0..n_nodes {
-        nodes.push(Arc::new(Box::new(create_node(&mut rng))));
+        nodes.push(Arc::new(create_node(&mut rng)));
     }
     for node in nodes.iter() {
         for peer in nodes.iter() {

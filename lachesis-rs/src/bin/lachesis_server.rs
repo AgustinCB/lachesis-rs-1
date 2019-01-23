@@ -1,13 +1,3 @@
-#[macro_use]
-extern crate serde_derive;
-#[macro_use]
-extern crate json;
-
-use actix_web::{
-    error, http, middleware, server, App, AsyncResponder, Error, HttpMessage, HttpRequest,
-    HttpResponse, Json,
-};
-
 use lachesis_rs::HttpServer;
 
 fn main() {
